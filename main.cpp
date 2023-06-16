@@ -1,8 +1,14 @@
-#include <iostream>
+// #include <iostream>
+#include <ncurses.h>
+
 
 using namespace std;
 
 int main(){
-    cout<<"Hello Snake"<<endl;
+    initscr();              // Start curses mode
+    printw("Hello World");  // Print Hello World
+    refresh();              // Print it on to the real screen
+    getch();                // Wait for user input
+    endwin();               // End curses mode
     return 0;
 }
