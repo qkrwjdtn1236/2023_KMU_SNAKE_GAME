@@ -1,7 +1,7 @@
 // #include <iostream>
 #include <ncurses.h>
 #include "src/Board.hpp"
-#define BOARD_DIM 20
+#define BOARD_DIM 21
 #define BOARD_ROWS BOARD_DIM
 #define BOARD_COLS BOARD_DIM * 2.5
 
