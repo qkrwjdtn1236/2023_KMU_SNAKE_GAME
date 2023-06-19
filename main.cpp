@@ -1,6 +1,8 @@
 // #include <iostream>
 #include <ncurses.h>
 #include "src/Board.hpp"
+#include "src/SnakeGame.hpp"
+
 #define BOARD_DIM 21
 #define BOARD_ROWS BOARD_DIM
 #define BOARD_COLS BOARD_DIM * 2.5
@@ -15,9 +17,20 @@ int main(int argc, char **argv){
     ////
 
     // 화면 출력용
-    Board board(BOARD_ROWS,BOARD_COLS);
+    SnakeGame game(BOARD_ROWS,BOARD_COLS);
+    
+    while(!game.isOver()){ // a lot case in gameover -> break;
+        game.processInput();
+        // get input user key
 
+        game.updateState();
+        // status update
 
+        game.redraw();
+        // update game map
+
+    }
+    
 
     ////
     getch();                // Wait for user input
