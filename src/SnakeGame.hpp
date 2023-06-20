@@ -11,33 +11,47 @@ public:
     SnakeGame(int y,int x){
         board = Board(y,x);
         this->initialize();
+        // printw("done init");
     }
 
     void processInput(){
         chtype input = board.getInput();
 
+        switch(input){
+            case KEY_UP:
+            case 'w':
+                snake.setDirection(up);
+                break;
+            case KEY_DOWN:
+            case 's':
+                snake.setDirection(down);
+                break;
+            case KEY_RIGHT:
+            case 'd':
+                snake.setDirection(right);
+                break;
+            case KEY_LEFT:
+            case 'a':
+                snake.setDirection(left);
+                break;
+            case 'p':
+                board.setTimeout(-1);
+                while(board.getInput() != 'p');
+                board.setTimeout(100);
+            default:
+                break;
+
+        }
+
     }
     void updateState(){
-        // 
-
-        // board.add(Drawable(3,3,'#'));
-        if(apple == NULL){
-            int x,y;
-            board.getEmptyCoordinates(y,x);
-            // board.add(Empty(apple->getY(), apple->getX()));
+        // printw("done init");
+        handleNextPiece(snake.nextHead());
+        if(apple == NULL)
+        {
+            createApple();
+        }
         
-            apple = new Apple(y,x);
-            board.add(*apple);
-        }
-        Snakepiece next = snake.nextHead();
-        if(next.getX() != apple->getX() && next.getY() != apple->getY()){
-            int emptyRow = snake.tail().getY();
-            int emptyCol = snake.tail().getX();
-            board.add(Empty(emptyRow,emptyCol));
-            snake.removePiece();
-        }
-        board.add(next);
-        snake.addPiece(next);
     }
 
     void redraw(){
@@ -54,28 +68,41 @@ public:
         game_over = false;
         srand(time(NULL));
 
-        snake.setDirection(down);
-
-        Snakepiece next = Snakepiece(1,1);
-        board.add(next);
-        snake.addPiece(next);
-
-        next = snake.nextHead();
-        board.add(next);
-        snake.addPiece(next);
-        
-
-        next = snake.nextHead();
-        board.add(next);
-        snake.addPiece(next);
-        
         snake.setDirection(right);
-        
-        next = snake.nextHead();
+        handleNextPiece(Snakepiece(5,5));
+        handleNextPiece(snake.nextHead());
+        handleNextPiece(snake.nextHead());
+        // snake.setDirection(right);
+        if(apple == NULL)
+            createApple();
+    }
+
+    void handleNextPiece(Snakepiece next){
+        if(apple != NULL && (next.getX() != apple->getX() || next.getY() != apple->getY())){
+            int emptyRow = snake.tail().getY();
+            int emptyCol = snake.tail().getX();
+            board.add(Empty(emptyRow,emptyCol));
+            snake.removePiece();
+        }else{
+            destroyApple();
+        }
+
         board.add(next);
         snake.addPiece(next);
-        
+    }
 
+    void createApple(){
+        if(apple == NULL){
+            int x,y;
+            board.getEmptyCoordinates(y,x);
+            apple = new Apple(y,x);
+            board.add(*apple);
+        }
+    }
+
+    void destroyApple(){
+        delete apple;
+        apple = NULL;
     }
 private:
     Board board;

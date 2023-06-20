@@ -68,6 +68,9 @@ public:
                     y = rand()%this->height,
                     x=rand()%this->width) != ' ');
     }
+    void setTimeout(int timeout){
+        wtimeout(board_win,timeout);
+    }
 private:
     int mapArray[21][21] = {0,}; // map info
     WINDOW *board_win; // map object
@@ -81,6 +84,7 @@ private:
         this->height = height;
         this->width = width;
 
-        wtimeout(board_win,1000);
+        wtimeout(board_win,100);
+        keypad(board_win,true);
     }
 };

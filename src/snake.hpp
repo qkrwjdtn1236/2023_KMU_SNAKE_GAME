@@ -6,7 +6,10 @@
 using namespace std;
 
 enum Direction{
-    up,down,left,right
+    up = -1,
+    down = 1,
+    left = -2,
+    right = 2
 };
 
 class Snakepiece : public Drawable{
@@ -49,7 +52,12 @@ public:
         return cur_direction;
     }
     void setDirection(Direction d){
-        cur_direction = d;
+        
+        if (cur_direction + d != 0){
+            cur_direction = d;
+        }
+        
+
     }
 
     Snakepiece nextHead(){
@@ -69,6 +77,7 @@ public:
             case right:
                 col++;
                 break;
+            
         }
         return Snakepiece(row,col);
     }
