@@ -1,6 +1,7 @@
 #pragma once
 #include <ncurses.h>
 #include "Board.hpp"
+#include "Drawable.hpp"
 
 class SnakeGame{
 public:
@@ -15,7 +16,7 @@ public:
 
     }
     void updateState(){
-        
+        board.add(Drawable(3,3,'#'));
     }
 
     void redraw(){

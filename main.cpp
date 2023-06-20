@@ -2,6 +2,7 @@
 #include <ncurses.h>
 #include "src/Board.hpp"
 #include "src/SnakeGame.hpp"
+#include "src/Drawable.hpp"
 
 #define BOARD_DIM 21
 #define BOARD_ROWS BOARD_DIM

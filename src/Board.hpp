@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Drawable.hpp"
 class Board{
 public:
     Board(){
@@ -37,6 +37,9 @@ public:
     }
     void addBorder(){
         box(board_win,0,0);
+    }
+    void add(Drawable drawable){
+        addAt(drawable.getX(),drawable.getY(),drawable.getIcon());
     }
     void addAt(int y, int x, chtype ch){
         mvwaddch(board_win,y,x,ch);
