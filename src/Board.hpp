@@ -2,6 +2,9 @@
 
 class Board{
 public:
+    Board(){
+        this->construct(0,0);
+    }
     Board(int height, int width){ // 맵 생성하는데 필요한 처리
         // int xMax,yMax;
         // getmaxyx(stdscr,yMax,xMax); // terminal size get
