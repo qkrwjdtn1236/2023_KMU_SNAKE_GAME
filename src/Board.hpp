@@ -7,31 +7,11 @@ public:
     Board(){
         this->construct(0,0);
     }
-    Board(int height, int width){ // 맵 생성하는데 필요한 처리
-        // int xMax,yMax;
-        // getmaxyx(stdscr,yMax,xMax); // terminal size get
-        
-        // // board map create
-        // board_win = newwin(height,width, 
-        //                 (yMax/2)-height / 2,(xMax/2)-width / 2);
-        
-        // // board show
-        // box(board_win,0,0);
-        // wrefresh(board_win);
+    Board(int height, int width){ 
+        // 맵 생성하는데 필요한 처리
 
-        // // board size info
-        // this->width = width;
-        // this->height = height;
-
-        // // this->setBasicMap();
-        // this->initialize();
         construct(height,width);
     }
-    // add boardLevel(optinal)
-    // Board(int height, int width,int level){
-    //     Board(height,width);
-    //     // setBasicMap(level);
-    // }
     
     void initialize(){
         clear();
@@ -100,5 +80,7 @@ private:
                         (yMax/2)-height / 2,(xMax/2)-width / 2);
         this->height = height;
         this->width = width;
+
+        wtimeout(board_win,1000);
     }
 };
