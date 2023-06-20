@@ -2,6 +2,10 @@
 #include <ncurses.h>
 #include "Board.hpp"
 #include "Drawable.hpp"
+#include "Apple.hpp"
+#include <time.h>
+#include <stdlib.h>
+
 
 class SnakeGame{
 public:
@@ -9,6 +13,7 @@ public:
         board = Board(y,x);
         board.initialize();
         game_over = false;
+        srand(time(NULL));
     }
 
     void processInput(){
@@ -16,7 +21,11 @@ public:
 
     }
     void updateState(){
+        int x,y;
+
         board.add(Drawable(3,3,'#'));
+        board.getEmptyCoordinates(y,x);
+        board.add(Apple(y,x));
     }
 
     void redraw(){

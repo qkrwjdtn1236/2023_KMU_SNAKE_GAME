@@ -1,5 +1,7 @@
 #pragma once
 #include "Drawable.hpp"
+#include <time.h>
+#include <stdlib.h>
 class Board{
 public:
     Board(){
@@ -80,6 +82,12 @@ public:
     //             }
     //     }
     // }
+
+    void getEmptyCoordinates(int &y,int &x){
+        while(mvwinch(board_win,
+                    y = rand()%this->height,
+                    x=rand()%this->width) != ' ');
+    }
 private:
     int mapArray[21][21] = {0,}; // map info
     WINDOW *board_win; // map object
@@ -90,6 +98,7 @@ private:
         getmaxyx(stdscr,yMax,xMax);
         board_win = newwin(height,width, 
                         (yMax/2)-height / 2,(xMax/2)-width / 2);
-        
+        this->height = height;
+        this->width = width;
     }
 };
